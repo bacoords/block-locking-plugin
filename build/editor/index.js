@@ -194,7 +194,7 @@ const AdvancedEditingButton = ({
     className: "components-button",
     onClick: toggleContentLock,
     icon: contentLock ? _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"] : _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }, contentLock ? "Locked Mode" : "Unlocked Mode"));
+  }, contentLock ? "Switch to Advanced" : "Switch to Basic"));
 };
 
 /**
@@ -570,8 +570,10 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default()(() => {
       align: "full",
       tagName: "section",
       layout: {
-        type: "default"
+        type: "constrained"
       },
+      templateLock: "",
+      showContentLock: true,
       metadata: {
         name: "Pattern " + postName
       },
@@ -587,18 +589,9 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default()(() => {
         }
       }
     },
-    innerBlocks: [["core/group", {
-      templateLock: "",
-      showContentLock: true,
-      layout: {
-        type: "constrained"
-      },
-      metadata: {
-        name: "Inner Container"
-      }
-    }, [["core/paragraph", {
-      placeholder: "Content locked"
-    }]]]]
+    innerBlocks: [["core/paragraph", {
+      placeholder: "Type / to choose a"
+    }]]
   });
 });
 

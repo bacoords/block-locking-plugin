@@ -52,7 +52,7 @@ const AdvancedEditingButton = ({ visibility }) => {
 				onClick={toggleContentLock}
 				icon={contentLock ? lock : unlock}
 			>
-				{contentLock ? "Locked Mode" : "Unlocked Mode"}
+				{contentLock ? "Switch to Advanced" : "Switch to Basic"}
 			</Button>
 		</>
 	);

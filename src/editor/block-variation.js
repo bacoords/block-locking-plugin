@@ -19,7 +19,9 @@ domReady(() => {
 		attributes: {
 			align: "full",
 			tagName: "section",
-			layout: { type: "default" },
+			layout: { type: "constrained" },
+			templateLock: "",
+			showContentLock: true,
 			metadata: { name: "Pattern " + postName },
 			className: "pattern-" + postSlug,
 			style: {
@@ -33,17 +35,6 @@ domReady(() => {
 				},
 			},
 		},
-		innerBlocks: [
-			[
-				"core/group",
-				{
-					templateLock: "",
-					showContentLock: true,
-					layout: { type: "constrained" },
-					metadata: { name: "Inner Container" },
-				},
-				[["core/paragraph", { placeholder: "Content locked" }]],
-			],
-		],
+		innerBlocks: [["core/paragraph", { placeholder: "Type / to choose a" }]],
 	});
 });
