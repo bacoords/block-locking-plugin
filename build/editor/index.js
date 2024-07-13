@@ -157,6 +157,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const SUPPORTED_BLOCKS = ["core/group", "core/cover"];
 const AdvancedEditingButton = ({
   visibility
 }) => {
@@ -169,7 +170,7 @@ const AdvancedEditingButton = ({
   }
   const parseBlocks = blocks => {
     blocks.forEach(block => {
-      if (block.name === "core/group" && block.attributes?.showContentLock) {
+      if (SUPPORTED_BLOCKS.includes(block.name) && block.attributes?.showContentLock) {
         block.attributes.templateLock = contentLock ? "" : "contentOnly";
         wp.data.dispatch("core/block-editor").updateBlock(block.clientId, {
           ...block
@@ -209,11 +210,9 @@ const AdvancedEditingButton = ({
     return;
   }
   _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_5___default()(() => {
-    const editorToolbar = document.querySelector(".edit-post-header__toolbar");
     const siteEditorToolbar = document.querySelector(".editor-header__toolbar");
-    console.log(editorToolbar, siteEditorToolbar);
     // If toolbar doesn't exist, we can't continue
-    if (!editorToolbar && !siteEditorToolbar) {
+    if (!siteEditorToolbar) {
       return;
     }
     // So turns out you can't append to an existing container without
@@ -223,7 +222,6 @@ const AdvancedEditingButton = ({
     buttonWrapper.style.cssText = "display:flex;";
 
     // add empty div to the toolbar so we can fill it.
-    editorToolbar?.appendChild(buttonWrapper);
     siteEditorToolbar?.appendChild(buttonWrapper);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createRoot)(buttonWrapper).render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AdvancedEditingButton, {
       visibility: true
@@ -261,6 +259,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const SUPPORTED_BLOCKS = ["core/group", "core/cover"];
 
 /**
  * Add the attribute to the block.
@@ -273,7 +272,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#blocks-registerblocktype
  */
 (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__.addFilter)("blocks.registerBlockType", "wpdev/toggle-content-lock/attributes", function (settings, name) {
-  if (name !== "core/group") {
+  if (SUPPORTED_BLOCKS.includes(name) === false) {
     return settings;
   }
   return {
@@ -325,7 +324,7 @@ function ContentToggleEdit(props) {
 }
 (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__.addFilter)("editor.BlockEdit", "wpdev/toggle-content-lock", (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.createHigherOrderComponent)(BlockEdit => {
   return props => {
-    if (props.name !== "core/group") {
+    if (SUPPORTED_BLOCKS.includes(props.name) === false) {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, {
         ...props
       });

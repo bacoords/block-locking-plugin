@@ -12,6 +12,8 @@ import { createHigherOrderComponent } from "@wordpress/compose";
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 
+const SUPPORTED_BLOCKS = ["core/group", "core/cover"];
+
 /**
  * Add the attribute to the block.
  * This is the attribute that will be saved to the database.
@@ -26,7 +28,7 @@ addFilter(
 	"blocks.registerBlockType",
 	"wpdev/toggle-content-lock/attributes",
 	function (settings, name) {
-		if (name !== "core/group") {
+		if (SUPPORTED_BLOCKS.includes(name) === false) {
 			return settings;
 		}
 
@@ -98,7 +100,7 @@ addFilter(
 	"wpdev/toggle-content-lock",
 	createHigherOrderComponent((BlockEdit) => {
 		return (props) => {
-			if (props.name !== "core/group") {
+			if (SUPPORTED_BLOCKS.includes(props.name) === false) {
 				return <BlockEdit {...props} />;
 			}
 

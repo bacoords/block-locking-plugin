@@ -7,6 +7,8 @@ import domReady from "@wordpress/dom-ready";
 import { __ } from "@wordpress/i18n";
 import { lock, unlock } from "@wordpress/icons";
 
+const SUPPORTED_BLOCKS = ["core/group", "core/cover"];
+
 const AdvancedEditingButton = ({ visibility }) => {
 	const [contentLock, setContentLock] = useState(true);
 	const { createNotice } = useDispatch(noticesStore);
@@ -17,7 +19,10 @@ const AdvancedEditingButton = ({ visibility }) => {
 
 	const parseBlocks = (blocks) => {
 		blocks.forEach((block) => {
-			if (block.name === "core/group" && block.attributes?.showContentLock) {
+			if (
+				SUPPORTED_BLOCKS.includes(block.name) &&
+				block.attributes?.showContentLock
+			) {
 				block.attributes.templateLock = contentLock ? "" : "contentOnly";
 				wp.data.dispatch("core/block-editor").updateBlock(block.clientId, {
 					...block,
@@ -73,12 +78,9 @@ subscribe(() => {
 	}
 
 	domReady(() => {
-		const editorToolbar = document.querySelector(".edit-post-header__toolbar");
 		const siteEditorToolbar = document.querySelector(".editor-header__toolbar");
-
-		console.log(editorToolbar, siteEditorToolbar);
 		// If toolbar doesn't exist, we can't continue
-		if (!editorToolbar && !siteEditorToolbar) {
+		if (!siteEditorToolbar) {
 			return;
 		}
 		// So turns out you can't append to an existing container without
@@ -88,7 +90,6 @@ subscribe(() => {
 		buttonWrapper.style.cssText = "display:flex;";
 
 		// add empty div to the toolbar so we can fill it.
-		editorToolbar?.appendChild(buttonWrapper);
 		siteEditorToolbar?.appendChild(buttonWrapper);
 		createRoot(buttonWrapper).render(
 			<AdvancedEditingButton visibility={true} />,
