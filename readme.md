@@ -7,9 +7,13 @@ This should not be used in production and **features may be changed/removed at a
 
 ## Features
 
-## "Uses Advanced Editing Lock" Group Block Inspector Control
+## "Uses Advanced Editing Lock" Block Setting
 
-Group blocks can opt into "advanced editing lock" by checking the "Uses Advanced Editing Lock" toggle in the Advanced Inspector Controls. This will allow you to lock the structure of the group block, but still allow you to edit the content itself.
+Group and cover blocks can opt into "advanced editing lock" by checking the "Uses Advanced Editing Lock" toggle in the Advanced Inspector Controls. This will allow you to lock the structure of the group/group block, but still allow you to edit the content itself.
+
+## "Repeater" Block Setting (disabled - broken since 6.6?)
+
+Button and List blocks can enable a "repeater" setting in the Advanced Inspector Controls. This will allow you to duplicate/remove individual buttons and list items while inside the "Basic" mode.
 
 ## "Advanced" Lock Toggle in Toolbar
 
@@ -24,3 +28,7 @@ Group block variation that is perfect for scaffolding patterns. It is a full-wid
 ### "View All Patterns" Custom Block (to be removed)
 
 This plugin also comes with a custom block that can show you all (or one specific) block patterns on the frontend of your site. Useful for when you want to test how patterns will render on your site.
+
+## Potential Ideas
+
+- [ ] Bring in support for section styles to locked group blocks?
