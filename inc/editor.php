@@ -28,6 +28,13 @@ function wpdev_block_locking_plugin_block_init() {
  */
 function enqueue_custom_block_editor_modifications() {
 
+	// Drop out unless in the 'page' post type.
+	// @todo Might need to test with site editor navigation.
+	$allowed_post_types = apply_filters( 'wpdev_block_locking_enabled_post_types', array( 'page' ) );
+	if ( ! in_array( get_post_type(), $allowed_post_types, true ) ) {
+		return;
+	}
+
 	$asset_file = include BLOCK_LOCKING_PLUGIN_DIR . 'build/editor/index.asset.php';
 	wp_enqueue_script(
 		'block-pattern-plugin-editor',
